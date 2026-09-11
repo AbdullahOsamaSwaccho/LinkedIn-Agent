@@ -1,0 +1,750 @@
+/* LinkedIn Agent Floating Widget & Flyout Stylesheet */
+
+.li-agent-widget {
+  position: fixed;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0a66c2;
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 24px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  touch-action: none;
+}
+
+.li-agent-widget:hover {
+  background: #004182;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.li-agent-widget.is-dragging {
+  cursor: grabbing !important;
+  opacity: 0.92;
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.li-drag-handle {
+  opacity: 0.75;
+  font-size: 14px;
+  cursor: grab;
+  user-select: none;
+}
+
+.li-agent-badge {
+  background: #137333;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.li-agent-panel {
+  position: fixed;
+  z-index: 9999998;
+  width: 440px;
+  max-height: 580px;
+  background: #ffffff;
+  border: 1px solid #dcdfe4;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  color: #191919;
+}
+
+.li-agent-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #ebebeb;
+  background: #f8fafc;
+}
+
+.li-panel-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.li-tab {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.li-tab:hover {
+  color: #0a66c2;
+}
+
+.li-tab.active {
+  color: #0a66c2;
+  border-bottom-color: #0a66c2;
+}
+
+#li-panel-close {
+  color: #64748b;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+#li-panel-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.li-agent-panel-body {
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.li-action-group {
+  margin-bottom: 10px;
+}
+
+.li-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  margin-bottom: 5px;
+}
+
+.li-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.li-input:focus {
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.2);
+}
+
+.li-agent-btn {
+  background: #0a66c2;
+  color: #ffffff;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.li-agent-btn:hover {
+  background: #004182;
+}
+
+.li-agent-btn.btn-sec {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.li-agent-btn.btn-sec:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.li-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.li-tag-pass {
+  background: #e6f4ea;
+  color: #137333;
+}
+
+.li-tag-lead {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.li-copy-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.li-copy-btn:hover {
+  background: #e2e8f0;
+}
+
+/* Toast Notifications for Keyboard Shortcuts */
+.li-agent-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: #1e293b;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 10000000;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+.li-agent-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.li-agent-toast-success {
+  background: #0f5132;
+  border: 1px solid #198754;
+  color: #ffffff;
+}
+
+.li-agent-toast-error {
+  background: #842029;
+  border: 1px solid #dc3545;
+  color: #ffffff;
+}
+
+/* Safe Markdown Typography */
+.li-code-block {
+  background: #f1f5f9;
+  padding: 8px 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  margin: 8px 0;
+  border: 1px solid #e2e8f0;
+}
+
+.li-code-inline {
+  background: #f1f5f9;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+.li-h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+  color: #0f172a;
+}
+
+.li-h2 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 10px 0 4px;
+  color: #1e293b;
+}
+
+.li-h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+  color: #334155;
+}
+
+.li-p {
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.li-markdown-list {
+  margin: 4px 0 6px 18px;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.li-markdown-list li {
+  margin-bottom: 3px;
+}
+
+/* Ollama / Local Info Callout */
+.li-info-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+/* Inline AI Feed Reply Button */
+.li-inline-ai-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 12px !important;
+  margin: 4px 4px !important;
+  border-radius: 6px !important;
+  border: none !important;
+  background: transparent !important;
+  color: #0a66c2 !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+  user-select: none !important;
+}
+
+.li-inline-ai-btn:hover {
+  background: rgba(10, 102, 194, 0.08) !important;
+  color: #004182 !important;
+}
+
+.li-inline-ai-spark {
+  font-size: 14px;
+  line-height: 1;
+  color: #0a66c2;
+}
+
+/* Inline Feed Reply Container */
+.li-inline-reply-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 12px 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.li-inline-reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.li-inline-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.li-inline-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.li-inline-pill:hover,
+.li-inline-pill.active {
+  background: #0a66c2;
+  color: #ffffff;
+  border-color: #0a66c2;
+}
+
+.li-inline-reply-output {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1e293b;
+  min-height: 48px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.li-inline-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Dual-Authentication & Settings Cards */
+.li-auth-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.li-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+
+.li-auth-badge.key {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.li-auth-badge.none {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.li-auth-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+
+
+.li-helper-text {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Post Draft Editor */
+.li-editor-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 110px;
+  padding: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.li-editor-textarea:focus {
+  outline: none;
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.15);
+}
+
+/* Mobile Preview Studio */
+.mobile-preview-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  background: #f8fafc;
+  margin-top: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mobile-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mobile-preview-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.mobile-preview-body {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #191919;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.see-more-btn {
+  color: #0a66c2;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+.see-more-btn:hover {
+  text-decoration: underline;
+}
+
+/* Scheduling & Publishing Controls */
+.scheduling-container {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.btn-publish-now {
+  background: #0a66c2;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-publish-now:hover {
+  background: #004182;
+  box-shadow: 0 2px 6px rgba(10, 102, 194, 0.25);
+}
+
+.btn-schedule-post {
+  background: #ffffff;
+  color: #0a66c2;
+  border: 1px solid #0a66c2;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-schedule-post:hover {
+  background: #e0f2fe;
+}
+
+/* Queue List Container */
+.queue-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.queue-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.queue-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.btn-cancel-post {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-cancel-post:hover {
+  background: #fecaca;
+}
+
+.empty-state {
+  text-align: center;
+  color: #64748b;
+  font-size: 12px;
+  padding: 24px 12px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+}
+
+/* Analytics Dashboard */
+.analytics-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.analytics-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.analytics-tile {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.analytics-tile-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.analytics-tile-val {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0a66c2;
+}
+
+.voice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Scoped isolation and style reset for extension containers */
+.li-agent-widget,
+.li-agent-panel,
+.li-inline-reply-box {
+  box-sizing: border-box !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  direction: ltr;
+}
+
+.li-agent-widget *,
+.li-agent-panel *,
+.li-inline-reply-box * {
+  box-sizing: border-box;
+}
+
+/* Status & Feedback Utility Classes */
+.li-status-success {
+  color: #137333 !important;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.li-status-error {
+  color: #c5221f !important;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.li-status-info {
+  color: #0a66c2 !important;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.li-status-muted {
+  color: #64748b !important;
+  font-weight: 400;
+  display: inline-block;
+}
+
+.li-banner-success {
+  background: #e6f4ea !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #137333 !important;
+  font-weight: 600;
+  font-size: 12px;
+  display: block;
+}
+
+.li-banner-error {
+  background: #fce8e6 !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #c5221f !important;
+  font-weight: 600;
+  font-size: 12px;
+  display: block;
+}

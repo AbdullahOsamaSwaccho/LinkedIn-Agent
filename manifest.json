@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn Growth & Profile Agent",
+  "version": "1.3.0",
+  "description": "Floating AI assistant for LinkedIn with custom AI API integration.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "LinkedIn Growth & Profile Agent"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms",
+    "notifications",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.linkedin.com/*",
+    "https://api.linkedin.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.openai.com/*",
+    "https://api.anthropic.com/*",
+    "https://api.groq.com/*",
+    "https://api.deepseek.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "commands": {
+    "toggle-agent-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Toggle LinkedIn Agent Panel"
+    },
+    "humanize-draft": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "Humanize Current Post Draft"
+    }
+  }
+}

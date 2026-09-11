@@ -1,0 +1,20 @@
+{
+  "name": "linkedin-growth-agent",
+  "version": "1.3.0",
+  "description": "Chrome Extension (Manifest V3) for LinkedIn with AI drafting, post scheduling, and inline feed integration",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "linkedin",
+    "ai",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT"
+}
