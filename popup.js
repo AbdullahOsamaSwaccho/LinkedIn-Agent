@@ -48,10 +48,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     return tabs[0];
   }
 
+  function isLinkedInUrl(rawUrl) {
+    try {
+      const { hostname } = new URL(rawUrl);
+      const host = hostname.toLowerCase();
+      return host === "linkedin.com" || host.endsWith(".linkedin.com");
+    } catch {
+      return false;
+    }
+  }
+
   // 4. Action: Toggle Panel
   document.getElementById("btn-toggle-panel").addEventListener("click", async () => {
     const tab = await getActiveTab();
-    if (tab && tab.url && tab.url.includes("linkedin.com")) {
+    if (tab && tab.url && isLinkedInUrl(tab.url)) {
       chrome.tabs.sendMessage(tab.id, {
         action: "EXECUTE_COMMAND",
         command: "toggle-agent-panel"
@@ -66,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 5. Action: Humanize Draft
   document.getElementById("btn-humanize-draft").addEventListener("click", async () => {
     const tab = await getActiveTab();
-    if (tab && tab.url && tab.url.includes("linkedin.com")) {
+    if (tab && tab.url && isLinkedInUrl(tab.url)) {
       chrome.tabs.sendMessage(tab.id, {
         action: "EXECUTE_COMMAND",
         command: "humanize-draft"
