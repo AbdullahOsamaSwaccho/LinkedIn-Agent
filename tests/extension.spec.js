@@ -91,8 +91,13 @@ test.describe('Network Interception & Safe Mocking (Zero API Cost)', () => {
     // Verify mocked network interception is active
     let intercepted = false;
     page.on('request', (req) => {
-      if (req.url().includes('generativelanguage.googleapis.com')) {
-        intercepted = true;
+      try {
+        const requestUrl = new URL(req.url());
+        if (requestUrl.hostname === 'generativelanguage.googleapis.com') {
+          intercepted = true;
+        }
+      } catch (_) {
+        // Ignore malformed/non-standard URLs in request events.
       }
     });
 
